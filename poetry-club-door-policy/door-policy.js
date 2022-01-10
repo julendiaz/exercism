@@ -1,4 +1,4 @@
-// @ts-check
+ // @ts-check
 //
 // ☝🏽 The line above enables type checking for this file. Various IDEs interpret
 // the @ts-check directive. It will give you helpful autocompletion on the web
@@ -37,14 +37,8 @@ export const frontDoorResponse = (line) => line[0];
  * @param {string} word the letters you responded with before
  * @returns {string} the front door password
  */
-export const frontDoorPassword = (word) => {
-  const getFirstLetter = word[0];
-  const firstLetterToUpperCase = getFirstLetter.toUpperCase; 
-  const restOfPassword = word.slice(1);
-  
-  console.log(typeof firstLetter, restOfPassword);
-  return firstLetter.toUpperCase + restOfPassword;
-}
+export const frontDoorPassword = (word) => `${word[0].toUpperCase()}${word.slice(1).toLowerCase()}`;
+
 /**
  * Respond with the correct character, given the line of the
  * poem, if this were said at the back door.
@@ -52,8 +46,9 @@ export const frontDoorPassword = (word) => {
  * @param {string} line
  * @returns {string}
  */
-export function backDoorResponse(line) {
-  throw new Error('Implement the backDoorResponse function');
+export const backDoorResponse = (line) => {
+  const lineWithoutWhiteSpace = line.trim();
+  return lineWithoutWhiteSpace[lineWithoutWhiteSpace.length - 1];
 }
 
 /**
@@ -63,6 +58,5 @@ export function backDoorResponse(line) {
  * @param {string} word the letters you responded with before
  * @returns {string} the back door password
  */
-export function backDoorPassword(word) {
-  throw new Error('Implement the backDoorPassword function');
-}
+export const backDoorPassword = (word) => `${frontDoorPassword(word)}, please`;
+
