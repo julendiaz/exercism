@@ -10,7 +10,7 @@
  * @param {string} name
  * @returns {number} time in minutes
  */
-export function timeToMixJuice(name) {
+export const timeToMixJuice = (name) => {
   switch (name) {
     case 'Pure Strawberry Joy':
       return 0.5;
@@ -53,7 +53,7 @@ const getWedges = (sizeOfLime) => {
   }
 }
 
-export function limesToCut(wedgesNeeded, limes) {
+export const limesToCut = (wedgesNeeded, limes) => {
   if (wedgesNeeded === 0) {
     return 0;
   } else {
@@ -80,7 +80,7 @@ export function limesToCut(wedgesNeeded, limes) {
  * @param {string[]} orders
  * @returns {string[]} remaining orders after the time is up
  */
-export function remainingOrders(timeLeft, orders) {
+export const remainingOrders = (timeLeft, orders) => {
   let minutesLeft = timeLeft;
   do { 
     minutesLeft -= timeToMixJuice(orders[0]); 
