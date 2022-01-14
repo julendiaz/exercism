@@ -54,12 +54,23 @@ const getWedges = (sizeOfLime) => {
 }
 
 export function limesToCut(wedgesNeeded, limes) {
-  // let wedgesAtHand = 0;
-  // while (wedgesAtHand <= wedgesNeeded) {
-  //   for (let i = 0; i < limes.lenght; i++) {
-  //     wedgesAtHand += 
-  //   }
-  // }
+  if (wedgesNeeded === 0) {
+    return 0;
+  } else {
+    let wedgesAtHand = 0;
+    let i = 0;
+    while (i < limes.length) {
+        wedgesAtHand += getWedges(limes[i]);
+
+        if (wedgesAtHand >= wedgesNeeded) {
+          break;
+        }
+        i++;
+    }
+    return (wedgesAtHand >= wedgesNeeded) ? i + 1 : i;
+  }
+
+  
 }
 
 /**
