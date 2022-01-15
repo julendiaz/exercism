@@ -66,7 +66,7 @@ export const limesToCut = (wedgesNeeded, limes) => {
  * @returns {string[]} remaining orders after the time is up
  */
 export const remainingOrders = (timeLeft, orders) => {
-  let ordersCopy = orders.slice();
+  const ordersCopy = orders.slice();
   let minutesLeft = timeLeft;
   do { 
     minutesLeft -= timeToMixJuice(ordersCopy[0]); 
