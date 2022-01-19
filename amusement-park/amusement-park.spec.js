@@ -45,19 +45,19 @@ describe('revokeTicket', () => {
 });
 
 describe('ticketStatus', () => {
-  xtest('correctly identifies that a ticket is not in the tracking object', () => {
+  test('correctly identifies that a ticket is not in the tracking object', () => {
     expect(ticketStatus(testTickets(), 'Y4KXZOYM')).toBe('unknown ticket id');
     expect(ticketStatus(testTickets(), '8ATQC1ZJ')).toBe('unknown ticket id');
     expect(ticketStatus(testTickets(), 'G833HR8A')).toBe('unknown ticket id');
   });
 
-  xtest('correctly identifies that a ticket is not sold', () => {
+  test('correctly identifies that a ticket is not sold', () => {
     expect(ticketStatus(testTickets(), 'V42NWRMQ')).toBe('not sold');
     expect(ticketStatus(testTickets(), 'A56MTX8E')).toBe('not sold');
     expect(ticketStatus(testTickets(), 'YEVHK4MC')).toBe('not sold');
   });
 
-  xtest('returns the correct string for a ticket that was sold', () => {
+  test('returns the correct string for a ticket that was sold', () => {
     const actual1 = ticketStatus(testTickets(), 'QINS6S94');
     expect(actual1).toBe('sold to Hong Hsu');
 
@@ -70,27 +70,27 @@ describe('ticketStatus', () => {
 });
 
 describe('simpleTicketStatus', () => {
-  xtest('identifies ticket that are not in the tracking object as invalid', () => {
+  test('identifies ticket that are not in the tracking object as invalid', () => {
     const expected = 'invalid ticket !!!';
     expect(simpleTicketStatus(testTickets(), 'Y4KXZOYM')).toBe(expected);
     expect(simpleTicketStatus(testTickets(), '8ATQC1ZJ')).toBe(expected);
     expect(simpleTicketStatus(testTickets(), 'G833HR8A')).toBe(expected);
   });
 
-  xtest('identifies tickets that are not sold as invalid', () => {
+  test('identifies tickets that are not sold as invalid', () => {
     const expected = 'invalid ticket !!!';
     expect(simpleTicketStatus(testTickets(), 'V42NWRMQ')).toBe(expected);
     expect(simpleTicketStatus(testTickets(), 'A56MTX8E')).toBe(expected);
     expect(simpleTicketStatus(testTickets(), 'YEVHK4MC')).toBe(expected);
   });
 
-  xtest('returns the visitor name for tickets that were sold', () => {
+  test('returns the visitor name for tickets that were sold', () => {
     expect(simpleTicketStatus(testTickets(), 'QINS6S94')).toBe('Hong Hsu');
     expect(simpleTicketStatus(testTickets(), 'H31SAW5Q')).toBe('Lior MacNeil');
     expect(simpleTicketStatus(testTickets(), 'M9ZTXP89')).toBe('Kamani Ybarra');
   });
 
-  xtest('tickets with "strange" name values are valid nevertheless', () => {
+  test('tickets with "strange" name values are valid nevertheless', () => {
     const tickets = {
       B7627X32: '',
       XF1X6S2W: 0,
@@ -105,7 +105,7 @@ describe('simpleTicketStatus', () => {
 });
 
 describe('gtcVersion', () => {
-  xtest('determines the GTC version if it is present', () => {
+  test('determines the GTC version if it is present', () => {
     const visitor1 = {
       name: 'Zohar Pekkanen',
       age: 28,
@@ -130,7 +130,7 @@ describe('gtcVersion', () => {
     expect(gtcVersion(visitor2)).toBe('1.6');
   });
 
-  xtest('returns nothing if there is no gtc object', () => {
+  test('returns nothing if there is no gtc object', () => {
     const visitor1 = {
       name: 'Xuân Jahoda',
       age: 15,
@@ -147,7 +147,7 @@ describe('gtcVersion', () => {
     expect(gtcVersion(visitor2)).toBeUndefined();
   });
 
-  xtest('returns nothing if there is a gtc object but no gtc version', () => {
+  test('returns nothing if there is a gtc object but no gtc version', () => {
     const visitor1 = {
       name: 'Xuân Jahoda',
       age: 15,
@@ -168,7 +168,7 @@ describe('gtcVersion', () => {
     expect(gtcVersion(visitor2)).toBeUndefined();
   });
 
-  xtest('does not modify the visitor object', () => {
+  test('does not modify the visitor object', () => {
     const visitor = {
       name: 'Zohar Pekkanen',
       age: 28,

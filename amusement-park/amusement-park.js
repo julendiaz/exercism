@@ -29,8 +29,12 @@ export const revokeTicket = (visitor) => {
  * @param {string} ticketId
  * @returns {string} ticket status
  */
-export function ticketStatus(tickets, ticketId) {
-  throw new Error('Please implement the ticketStatus function.');
+export const ticketStatus = (tickets, ticketId) => {
+  if (!tickets.hasOwnProperty(ticketId)) {
+    return 'unknown ticket id';
+  } else {
+    return (tickets[ticketId] === null) ? 'not sold' : `sold to ${tickets[ticketId]}`;
+  }
 }
 
 /**
@@ -41,8 +45,9 @@ export function ticketStatus(tickets, ticketId) {
  * @param {string} ticketId
  * @returns {string} ticket status
  */
-export function simpleTicketStatus(tickets, ticketId) {
-  throw new Error('Please implement the simpleTicketStatus function.');
+export const simpleTicketStatus = (tickets, ticketId) => {
+  const status = ticketStatus(tickets, ticketId);
+  return (status === 'unknown ticket id') || (status === 'not sold') ? 'invalid ticket !!!' : tickets[ticketId];
 }
 
 /**
@@ -51,6 +56,4 @@ export function simpleTicketStatus(tickets, ticketId) {
  * @param {VisitorWithGtc} visitor
  * @returns {string | undefined} version
  */
-export function gtcVersion(visitor) {
-  throw new Error('Please implement the gtcVersion function.');
-}
+export const gtcVersion = (visitor) => (visitor.hasOwnProperty("gtc")) ? visitor.gtc.version : undefined;
