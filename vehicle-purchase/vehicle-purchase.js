@@ -20,10 +20,9 @@ export const needsLicense = (kind) => kind === "car" || kind === "truck";
  * @param {string} option2
  * @returns {string} a sentence of advice which option to choose
  */
-export function chooseVehicle(option1, option2) {
-  const arrayWithVehicles = [...arguments];
-  const sortedVehicles = arrayWithVehicles.sort();
-  return `${sortedVehicles[0]} is clearly the better choice.`;
+export const chooseVehicle = (option1, option2) => {
+  return (option1 < option2) ? `${option1} is clearly the better choice.` 
+          : `${option2} is clearly the better choice.`;
 }
 
 /**

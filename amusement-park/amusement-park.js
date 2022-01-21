@@ -9,7 +9,7 @@
  * @param {string} ticketId
  * @returns {Visitor} the visitor that was created
  */
-export const createVisitor = (name, age, ticketId) => ({ name: name, age: age, ticketId: ticketId});
+export const createVisitor = (name, age, ticketId) => ({ name, age, ticketId});
 
 /**
  * Revokes a ticket for a visitor.
@@ -17,7 +17,7 @@ export const createVisitor = (name, age, ticketId) => ({ name: name, age: age, t
  * @param {Visitor} visitor the visitor with an active ticket
  * @returns {Visitor} the visitor without a ticket
  */
-export const revokeTicket = (visitor) => {
+export const revokeTicket = visitor => {
   visitor.ticketId = null; 
   return visitor;
 }
@@ -30,11 +30,10 @@ export const revokeTicket = (visitor) => {
  * @returns {string} ticket status
  */
 export const ticketStatus = (tickets, ticketId) => {
-  if (!tickets.hasOwnProperty(ticketId)) {
-    return 'unknown ticket id';
-  } else {
-    return (tickets[ticketId] === null) ? 'not sold' : `sold to ${tickets[ticketId]}`;
+  if (ticketId in tickets) {
+    return tickets[ticketId] ? `sold to ${tickets[ticketId]}` : 'not sold';
   }
+  return 'unknown ticket id';
 }
 
 /**
@@ -45,10 +44,7 @@ export const ticketStatus = (tickets, ticketId) => {
  * @param {string} ticketId
  * @returns {string} ticket status
  */
-export const simpleTicketStatus = (tickets, ticketId) => {
-  const status = ticketStatus(tickets, ticketId);
-  return (status === 'unknown ticket id') || (status === 'not sold') ? 'invalid ticket !!!' : tickets[ticketId];
-}
+export const simpleTicketStatus = (tickets, ticketId) => tickets[ticketId] ?? 'invalid ticket !!!';
 
 /**
  * Determines the version of the GTC that was signed by the visitor.
@@ -56,4 +52,4 @@ export const simpleTicketStatus = (tickets, ticketId) => {
  * @param {VisitorWithGtc} visitor
  * @returns {string | undefined} version
  */
-export const gtcVersion = (visitor) => (visitor.hasOwnProperty("gtc")) ? visitor.gtc.version : undefined;
+export const gtcVersion = visitor => visitor?.gtc?.version;
