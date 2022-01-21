@@ -9,16 +9,28 @@
  */
 export const twoSum = (array1, array2) => Number(array1.join("")) + Number(array2.join(""));
 
+
+
+const convertToArray = (num) => Array.from(String(num));
+
+const spliceArray = (arr) => arr.splice(arr.length / 2, arr.length / 2);
+
 /**
  * Checks whether a number is a palindrome.
  *
  * @param {number} value
  * @returns {boolean}  whether the number is a palindrome or not
  */
-export function luckyNumber(value) {
-  const valueArray = Array.from(String(value));
-  (valueArray.length % 2 === 0) ? let secondPart = valueArray.splice(valueArray.length / 2, valueArray.length / 2) : 
-  return true;
+
+export const luckyNumber = (value) => {
+  let palindrome = convertToArray(value);
+  // Get rid of the middle Number
+  if (palindrome.length % 2 !== 0) palindrome.splice(Math.floor(palindrome.length / 2), 1);
+
+  const firstPartOfPalindrome = spliceArray(palindrome);
+  const secondPartOfPalindrome = [...palindrome].reverse();
+
+  return firstPartOfPalindrome.join("") === secondPartOfPalindrome.join("");
 }
 
 /**
@@ -28,6 +40,12 @@ export function luckyNumber(value) {
  * @param {string|null|undefined} input
  * @returns {string} error message
  */
-export function errorMessage(input) {
-  throw new Error('Implement the errorMessage function');
+export const errorMessage = (input) => {
+  if (Number(input)) {
+    return "";
+  } else if (input === null || input === "" || input === undefined) {
+    return "Required field";
+  } else {
+    return "Must be a number besides 0";
+  }
 }
