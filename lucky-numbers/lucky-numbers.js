@@ -13,8 +13,6 @@ export const twoSum = (array1, array2) => Number(array1.join("")) + Number(array
 
 const convertToArray = (num) => Array.from(String(num));
 
-const spliceArray = (arr) => arr.splice(arr.length / 2, arr.length / 2);
-
 /**
  * Checks whether a number is a palindrome.
  *
@@ -23,14 +21,8 @@ const spliceArray = (arr) => arr.splice(arr.length / 2, arr.length / 2);
  */
 
 export const luckyNumber = (value) => {
-  let palindrome = convertToArray(value);
-  // Get rid of the middle Number
-  if (palindrome.length % 2 !== 0) palindrome.splice(Math.floor(palindrome.length / 2), 1);
-
-  const firstPartOfPalindrome = spliceArray(palindrome);
-  const secondPartOfPalindrome = [...palindrome].reverse();
-
-  return firstPartOfPalindrome.join("") === secondPartOfPalindrome.join("");
+  const palindrome = convertToArray(value);
+  return palindrome.join("") === palindrome.reverse().join("");
 }
 
 /**
@@ -43,7 +35,7 @@ export const luckyNumber = (value) => {
 export const errorMessage = (input) => {
   if (Number(input)) {
     return "";
-  } else if (input === null || input === "" || input === undefined) {
+  } else if (!input) {
     return "Required field";
   } else {
     return "Must be a number besides 0";
