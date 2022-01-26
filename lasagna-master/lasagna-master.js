@@ -28,16 +28,10 @@ export const quantities = function (layers) {
     }
 
     for (let i = 0; i < layers.length; i++) {
-        switch (layers[i]) {
-            case "noodles":
-                quantitiesForMeal.noodles += 50;
-                break;
-            case "sauce":
-                quantitiesForMeal.sauce += 0.2;
-                break;
-            default: 
-                quantitiesForMeal.noodles += 0;
-                break;
+        if (layers[i] === "noodles") {
+            quantitiesForMeal.noodles += 50;
+        } else if (layers[i] === "sauce") {
+            quantitiesForMeal.sauce += 0.2;
         }
     }
 
