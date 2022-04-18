@@ -1,5 +1,10 @@
 // @ts-check
 
+//**
+// Helper values
+//**
+const ONE_DAY_WORKING_HOUR = 8
+const ONE_MONTH_WORKING_DAYS = 22
 
 
 /**
@@ -8,7 +13,7 @@
  * @param {number} ratePerHour
  * @returns {number} the rate per day
  */
-export const dayRate = (ratePerHour) => ratePerHour*8;
+export const dayRate = ratePerHour => ratePerHour * ONE_DAY_WORKING_HOUR;
 
 /**
  * Calculates the number of days in a budget, rounded down
@@ -25,7 +30,7 @@ export const daysInBudget = (budget, ratePerHour) => Math.floor(budget / dayRate
  * @param {number} ratePerHour
  * @returns {number} the rate per day
  */
- export const monthlyRate = (ratePerHour) => dayRate(ratePerHour) * 22;
+ export const monthlyRate = (ratePerHour) => dayRate(ratePerHour) * ONE_MONTH_WORKING_DAYS;
  /**
  * Applies a discount amount to the total price
  *
@@ -47,8 +52,9 @@ export const daysInBudget = (budget, ratePerHour) => Math.floor(budget / dayRate
 
 export const priceWithMonthlyDiscount = (ratePerHour, numDays, discount) => {
   const discountedMonthlyRate = applyDiscount(monthlyRate(ratePerHour), discount);
-  const numberOfFullMonths = Math.floor(numDays / 22); 
+  const numberOfFullMonths = Math.floor(numDays / ONE_MONTH_WORKING_DAYS); 
   const fullMonthsPriceWithDiscount = numberOfFullMonths * discountedMonthlyRate;
-  const remainingDays = numDays % 22; 
+  const remainingDays = numDays % ONE_MONTH_WORKING_DAYS; 
   return Math.ceil(fullMonthsPriceWithDiscount + (remainingDays * dayRate(ratePerHour)));
 }
+

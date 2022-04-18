@@ -16,10 +16,7 @@
  */
 
 
-export const translate2d = (dx, dy) => {
-  const moveCoordinates = (x, y) => [x + dx, y + dy];
-  return moveCoordinates;
-}
+export const translate2d = (dx, dy) => (x, y) => [x + dx, y + dy];
 
 /**
  * Create a function that returns a function making use of a closure to
@@ -31,10 +28,7 @@ export const translate2d = (dx, dy) => {
  * @returns {function} a function which takes an x, y parameter, returns the
  *  scaled coordinate pair in the form [x, y]
  */
-export const scale2d = (sx, sy) => {
-  const scaleCoordinates = (x, y) => [x * sx, y * sy];
-  return scaleCoordinates;
-}
+export const scale2d = (sx, sy) => (x, y) => [x * sx, y * sy];
 
 /**
  * Create a composition function that returns a function that combines two
@@ -47,13 +41,12 @@ export const scale2d = (sx, sy) => {
  *  transformed coordinate pair in the form [x, y]
  */
 
-export const composeTransform = (f, g) => {
+export const composeTransform = (f, g) => { 
   return (...coordinates) => {
     const firstOperation = f(...coordinates);
     return g(...firstOperation);
   }
 }
-
 /**
  * Return a function that memoizes the last result.  If the arguments are the same as the last call,
  * then memoized result returned.

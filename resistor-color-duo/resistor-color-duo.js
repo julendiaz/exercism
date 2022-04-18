@@ -3,24 +3,13 @@
 // convenience to get you started writing code faster.
 //
 
-export const decodedValue = (arr) => {
-  let count = []; 
+const COLORS = [
+  'black', 'brown', 'red', 'orange', 'yellow', 'green', 'blue', 'violet',
+  'grey', 'white',
+];
 
-  const colorValues = {
-    black: 0,
-    brown: 1,
-    red: 2,
-    orange: 3,
-    yellow: 4,
-    green: 5,
-    blue: 6,
-    violet: 7,
-    grey: 8,
-    white: 9,
-  }; 
+const colorCode = (color) => COLORS.indexOf(color);
 
-  for (let i = 0; i < 2; i++) {
-    count.push(colorValues[arr[i]]);
-  }
-  return parseInt(count.join(""), 10);
-};
+export function decodedValue([tens, ones]) {
+  return colorCode(tens) * 10 + colorCode(ones)
+}

@@ -20,9 +20,14 @@ const convertToArray = (num) => Array.from(String(num));
  * @returns {boolean}  whether the number is a palindrome or not
  */
 
-export const luckyNumber = (value) => {
-  const palindrome = convertToArray(value);
-  return palindrome.join("") === palindrome.reverse().join("");
+// export const luckyNumber = (value) => {
+//   const palindrome = convertToArray(value);
+//   return palindrome.join("") === palindrome.reverse().join("");
+// }
+
+export function luckyNumber(value) {
+  // const string = String(value)
+  return String(value) === String(value).split('').reverse().join('');
 }
 
 /**

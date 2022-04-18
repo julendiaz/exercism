@@ -11,17 +11,17 @@
  * }
  */
 
-export function cookingStatus(time) {
-    return (time === 0) ? "Lasagna is done." 
-        : (time > 0) ? "Not done, please wait."
+export const cookingStatus = remainingTime => {
+    return (remainingTime === 0) ? "Lasagna is done." 
+        : (remainingTime > 0) ? "Not done, please wait."
         : "You forgot to set the timer.";
 }
 
-export const preparationTime = function (layers, timePerLayer = 2) {
+export const preparationTime = (layers, timePerLayer = 2) => {
     return layers.length * timePerLayer;
 }
 
-export const quantities = function (layers) {
+export const quantities = layers => {
     const quantitiesForMeal = {
         noodles: 0,
         sauce: 0
@@ -38,9 +38,9 @@ export const quantities = function (layers) {
     return quantitiesForMeal;
 }
 
-export const addSecretIngredient = function (myFriendList, myList) { myList.push(myFriendList[myFriendList.length - 1]) };
+export const addSecretIngredient = (myFriendList, myList) => { myList.push(myFriendList[myFriendList.length - 1]) };
 
-export const scaleRecipe = function (recipe, portions) {
+export const scaleRecipe = (recipe, portions) => {
     const scaledRecipe = {};
     Object.entries(recipe).forEach(([key, value]) => {
         scaledRecipe[key] = (value / 2) * portions;

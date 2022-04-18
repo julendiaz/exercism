@@ -9,7 +9,7 @@
  * @returns {Card} the first card in the deck
  */
 export const getFirstCard = (deck) => {
-  const [firstCard, ...rest] = deck; 
+  const [firstCard] = deck; 
   return firstCard;
 }
 
@@ -21,7 +21,7 @@ export const getFirstCard = (deck) => {
  * @returns {Card} the second card in the deck
  */
 export const getSecondCard = (deck) => {
-  const [firstCard, secondCard, ...rest] = deck;
+  const [, secondCard] = deck;
   return secondCard;
 }
 
@@ -47,7 +47,7 @@ export const swapTopTwoCards = (deck) => {
  */
 export const discardTopCard = (deck) => {
   const [firstCard, ...rest] = deck;
-  return [firstCard, [...rest]];
+  return [firstCard, rest];
 }
 
 /** @type Card[] **/

@@ -9,14 +9,13 @@
 //
 // In your own projects, files, and code, you can play with @ts-check as well.
 
-import { checkStatus, checkInventory, storeStatus } from './grocer';
+import { checkStatus, checkInventory, storeStatus, getLastQuery, setResponse } from './grocer';
 
 /**
  * Returns the service status as a boolean value
  * @return {boolean}
  */
-export const isServiceOnline = () => (storeStatus === 'ONLINE') ? true : false;
-
+export const isServiceOnline = () => checkStatus((serviceStatus) => serviceStatus === 'ONLINE');
 /**
  * Pick a fruit using the checkInventory API
  *
@@ -25,8 +24,9 @@ export const isServiceOnline = () => (storeStatus === 'ONLINE') ? true : false;
  * @param {InventoryCallback} callback
  * @return {AvailabilityAction} the result from checkInventory
  */
-export function pickFruit(variety, quantity, callback) {
-  throw new Error('Implement the pickFruit function');
+
+export const pickFruit = (variety, quantity, callback) => {
+  return checkInventory({variety, quantity}, callback);
 }
 
 /**
@@ -37,7 +37,8 @@ export function pickFruit(variety, quantity, callback) {
  * @return {AvailabilityAction} whether the fruit was purchased 'PURCHASE' or 'NOOP'
  */
 export function purchaseInventoryIfAvailable(err, isAvailable) {
-  throw new Error('Implement the purchaseInventoryIfAvailable function');
+  if (err) throw new Error('Server Offline');
+  return (isAvailable) ? 'PURCHASE' : 'NOOP';
 }
 
 /**
@@ -48,5 +49,5 @@ export function purchaseInventoryIfAvailable(err, isAvailable) {
  * @return {AvailabilityAction} whether the fruit was purchased 'PURCHASE' or 'NOOP'
  */
 export function pickAndPurchaseFruit(variety, quantity) {
-  throw new Error('Implement the pickAndPurchaseFruit function');
+  return pickFruit(variety, quantity, purchaseInventoryIfAvailable);
 }
